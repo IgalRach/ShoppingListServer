@@ -35,16 +35,13 @@ public class ShoppingListController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<ShoppingList>> CreateShoppingList([FromBody] ShoppingList shoppingList)
     {
-        if (shoppingList == null || shoppingList.Products == null)
+        if (shoppingList == null)
         {
             return BadRequest("Invalid shopping list data.");
         }
 
-        //var curShoppinglIst = new ShoppingList();
-        //curShoppinglIst.Products = shoppingList.Products;
-
-
         _context.ShoppingLists.Add(shoppingList);
+        _context.Products.AddRange(shoppingList.Products);
         await _context.SaveChangesAsync();
 
         return CreatedAtAction(nameof(GetShoppingListById), new { id = shoppingList.Id }, shoppingList);

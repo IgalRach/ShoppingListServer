@@ -5,8 +5,7 @@ public class Product
     public Guid Id { get; set; }
     [Required]
     public required string Name {  get; set; }
+    public  int Quantity { get; set; }
     [Required]
-    public Guid CategoryId { get; set; }
-    [Required]
-    public Category Category { get; set; }
+    public string Category { get; set; }
 }
